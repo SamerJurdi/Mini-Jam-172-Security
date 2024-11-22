@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic; // For List
 using UnityEngine;
 using TMPro;
 
@@ -19,13 +20,17 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private float shakeDuration = 0.5f;
     [Range(0f, 1f)]
     [SerializeField] public float pitchRange;
-    public int[] CharacterIndexes;
+    public float BadWordsShakeDuration = 5f;
+    public string targetWord;
+    private int[] CharacterIndexes;
 
     void Start()
     {
         tmpro = GetComponent<TextMeshPro>();
         soundThing = GameObject.Find("AudioPool").GetComponent<SoundPool>();
         originalTime = TextDisplayTime;
+
+        CharacterIndexes = GetCharacterIndexes(text, targetWord);
     }
 
     void Update()
@@ -35,6 +40,24 @@ public class SpeechBubble : MonoBehaviour
             StartCoroutine(WriteTextWithShake(text, originalTime));
             PrintText = false;
         }
+    }
+
+   
+    int[] GetCharacterIndexes(string mainText, string targetWord)
+    {
+        List<int> indexes = new List<int>();
+
+        int startIndex = 0;
+        while ((startIndex = mainText.IndexOf(targetWord, startIndex)) != -1)
+        {
+            for (int i = 0; i < targetWord.Length; i++)
+            {
+                indexes.Add(startIndex + i);
+            }
+            startIndex += targetWord.Length;
+        }
+
+        return indexes.ToArray();
     }
 
     IEnumerator WriteTextWithShake(string text, float displayTimePerCharacter)
@@ -59,17 +82,19 @@ public class SpeechBubble : MonoBehaviour
 
             if (System.Array.Exists(CharacterIndexes, index => index == i))
             {
-                StartCoroutine(ConstantShakeCharacter(i));
+                StartCoroutine(ConstantShakeCharacter(i, BadWordsShakeDuration));
             }
 
             yield return new WaitForSeconds(displayTimePerCharacter);
         }
     }
 
-
-    IEnumerator ConstantShakeCharacter(int charIndex)
+    IEnumerator ConstantShakeCharacter(int charIndex, float timer)
     {
-        while (true)
+        float currentShakePower = shakePower;
+        float shakeDecayRate = shakePower / timer; 
+
+        while (timer > 0)
         {
             TMP_TextInfo textInfo = tmpro.textInfo;
             if (charIndex >= textInfo.characterCount) yield break;
@@ -82,8 +107,8 @@ public class SpeechBubble : MonoBehaviour
 
             int vertexIndex = charInfo.vertexIndex;
             Vector3 offset = new Vector3(
-                Random.Range(-shakePower, shakePower),
-                Random.Range(-shakePower, shakePower),
+                Random.Range(-currentShakePower, currentShakePower),
+                Random.Range(-currentShakePower, currentShakePower),
                 0f
             );
 
@@ -95,8 +120,10 @@ public class SpeechBubble : MonoBehaviour
             mesh.vertices = vertices;
             tmpro.canvasRenderer.SetMesh(mesh);
 
+            currentShakePower = Mathf.Max(0, currentShakePower - (shakeDecayRate * Time.deltaTime));
+            timer -= Time.deltaTime;
+
             yield return null;
         }
     }
-
 }

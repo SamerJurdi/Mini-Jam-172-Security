@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 2201455077071208307}
   - component: {fileID: 4816961110110559261}
   - component: {fileID: 7714358845159327304}
+  - component: {fileID: 1701811515551271606}
   m_Layer: 0
   m_Name: SpechBubble
   m_TagString: Untagged
@@ -274,10 +275,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmpro: {fileID: 4816961110110559261}
-  text: this is a speech bubble text example, i will add more stuff to it soon
+  text: this is a speech bubble text example, i will add more stuff to it soon!
   TextDisplayTime: 0.07
   PrintText: 0
   soundThing: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 5254dfebbfa841c44b87cc9f4dd4efd0, type: 3}
-  shakePower: 0.05
-  shakeDuration: 1
+  audioClip: {fileID: 8300000, guid: 3de910a02aaea994a9b4cade4633ffe6, type: 3}
+  shakePower: 0.02
+  volumeControll: 0.031
+  shakeDuration: 0.3
+  pitchRange: 0.087
+  CharacterIndexes: 090000000a0000000b0000000c0000000d0000000e0000000f000000
+--- !u!222 &1701811515551271606
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739507506343030291}
+  m_CullTransparentMesh: 1
