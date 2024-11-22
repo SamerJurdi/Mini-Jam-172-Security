@@ -14,7 +14,12 @@ public class SpeechBubble : MonoBehaviour
     private Mesh mesh;
     private Vector3[] vertices;
     [SerializeField] private float shakePower = 0.1f;
+    [Range(0f, 1f)]
+    [SerializeField] public float volumeControll;
     [SerializeField] private float shakeDuration = 0.5f;
+    [Range(0f, 1f)]
+    [SerializeField] public float pitchRange;
+    public int[] CharacterIndexes;
 
     void Start()
     {
@@ -40,20 +45,31 @@ public class SpeechBubble : MonoBehaviour
 
         for (int i = 0; i < text.Length; i++)
         {
-            tmpro.text += text[i];
-            tmpro.ForceMeshUpdate();
-            soundThing.PlaySound(audioClip, Vector2.zero, 0.5f, false);
+            if (System.Array.Exists(CharacterIndexes, index => index == i))
+            {
+                tmpro.text += $"<color=red>{text[i]}</color>";
+            }
+            else
+            {
+                tmpro.text += text[i];
+            }
 
-            StartCoroutine(ShakeCharacter(i));
+            tmpro.ForceMeshUpdate();
+            soundThing.PlaySound(audioClip, Vector2.zero, volumeControll, false, pitchRange);
+
+            if (System.Array.Exists(CharacterIndexes, index => index == i))
+            {
+                StartCoroutine(ConstantShakeCharacter(i));
+            }
+
             yield return new WaitForSeconds(displayTimePerCharacter);
         }
     }
 
-    IEnumerator ShakeCharacter(int charIndex)
-    {
-        float shakeTimer = 0f;
 
-        while (shakeTimer < shakeDuration)
+    IEnumerator ConstantShakeCharacter(int charIndex)
+    {
+        while (true)
         {
             TMP_TextInfo textInfo = tmpro.textInfo;
             if (charIndex >= textInfo.characterCount) yield break;
@@ -79,8 +95,8 @@ public class SpeechBubble : MonoBehaviour
             mesh.vertices = vertices;
             tmpro.canvasRenderer.SetMesh(mesh);
 
-            shakeTimer += Time.deltaTime;
             yield return null;
         }
     }
+
 }

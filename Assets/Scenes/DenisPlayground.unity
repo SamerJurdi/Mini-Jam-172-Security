@@ -435,12 +435,56 @@ PrefabInstance:
       value: this is a speech bubble text example, i will add more stuff to it soon!
       objectReference: {fileID: 0}
     - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3de910a02aaea994a9b4cade4633ffe6, type: 3}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: pitchRange
+      value: 0.087
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
       propertyPath: shakePower
       value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
       propertyPath: shakeDuration
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: volumeControll
+      value: 0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[0]
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[2]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[3]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[4]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[5]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714358845159327304, guid: 59852491f3eae544f9fcd985de9c444e, type: 3}
+      propertyPath: CharacterIndexes.Array.data[6]
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -25,14 +25,14 @@ public class SoundPool : MonoBehaviour
             audioPool.Enqueue(audioSource);
         }
     }
-    public void PlaySound(AudioClip clip, Vector3 position, float volume = 1f, bool loop = false)
+    public void PlaySound(AudioClip clip, Vector3 position, float volume = 1f, bool loop = false, float pitchDiff = 1)
     {
         if (audioPool.Count > 0)
         {
             AudioSource audioSource = audioPool.Dequeue();
             audioSource.transform.position = position;
             audioSource.clip = clip;
-            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.pitch = Random.Range(1f - pitchDiff, 1f + pitchDiff);
             audioSource.volume = volume;
             audioSource.loop = loop;
             audioSource.gameObject.SetActive(true);
