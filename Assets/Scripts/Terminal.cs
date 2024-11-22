@@ -8,7 +8,7 @@ public class Terminal : MonoBehaviour
     public float xAxis;
     public float yAxis;
     public float distance;
-    public GameObject text;
+    public GameObject[] inputThing;
     void Start()
     {
         
@@ -21,7 +21,13 @@ public class Terminal : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            Instantiate(text, screenSpace, Quaternion.identity);
+            Instantiate(inputThing[0], screenSpace, Quaternion.identity);
+            screenSpace = new Vector2(xAxis, yAxis);
+            yAxis -= distance;
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Instantiate(inputThing[1], screenSpace, Quaternion.identity);
             screenSpace = new Vector2(xAxis, yAxis);
             yAxis -= distance;
         }
